@@ -1,0 +1,949 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+</html>
+
+<script>
+//JS Notes
+
+//Did you know that there is a difference between let and var?
+  //let has block scoping:
+ if(true) {
+   var car = 12
+ }
+ console.log(car) //this would give us 12.
+
+ if(true) {
+   let car = 12
+ }
+ console.log(car) //this would give us undefined. Pluralsight says that it is actually better to use let because it will help you catch errors more easily.
+
+//--------------------------------------------------------------------
+
+//Simple clean code. Instead of this:
+var score = [0, 0];
+var roundScore = 0;
+//Try this:
+var scores, roundScore;
+score = [0, 0];
+roundScore = 0;
+
+//--------------------------------------------------------------------
+
+ //The old saying in JS that everything is an object is almost true. You have to break them up as follows:
+  //Primitives are:
+    numbers
+    booleans
+    strings 
+    undefined 
+    null
+
+  //Objects are:
+  arrays 
+  functions 
+  objects 
+  dates 
+  wrappers for numbers, strings, and booleans
+
+//--------------------------------------------------------------------
+  //Easy way to use sort method on numbers, and then displaying to DOM. Using .sort on its own will only sort in alphabetical order.
+        var duh = document.getElementById("duh");
+        var array = [3, 4, 12, 59, 3, 2];
+        array.sort(function(a, b){return a-b});
+        var order = [];
+        order.push(array);
+        var divy = document.createElement('div');
+        divy.textContent = order;
+        duh.appendChild(divy);
+
+  //A more elaborate way to do it might be the following:
+  var arr = [3, 4, 12, 59, 3, 2];
+    var huh = [];
+        for (var i = 0; i < arr.length; i++) {
+            huh.push(parseFloat(arr[i]));
+        }
+
+        console.log(huh.sort(sorter));
+    
+        function sorter(a, b) {
+            return (a - b)
+        }
+
+//--------------------------------------------------------------------
+
+//5 different types of data types:
+  //Number
+  //String
+  //Boolean
+  //Undefined
+  //Null
+
+  //--------------------------------------------------------------------
+
+  //JS has dynamic typing, which means its data types are automatically assigned to variables.
+
+
+
+//Random - toLowerCase() doesn't just work for the starting letter. It works for any letter in the string (caMeLCasE becomes camelcase)
+    //This is the same for toUpperCase();
+
+//--------------------------------------------------------------------
+
+//InnerHTML vs textContent: innerHTML is the most useful, and supported by all browsers back to 2010. innerHTML can be text content or HTML source code. TextContent is in standard's spec around 2011, and is supported by browsers since about 2013. textContent's value is meant to be text only, not HTML. It is not style aware.
+
+//--------------------------------------------------------------------
+
+//Just remember that:
+Math.floor();
+//Just returns the largest integer less than or equal to that number. So:
+console.log(Math.floor(5.95)) //would log 5.
+//ALSO: Math.floor is needed for returning the whole number:
+Math.random() * 6; //would return numbers like 3.45, or 5.434324323. In order to make it a whole random number, say between 1 and 6, we need the whole kabab:
+var dice = Math.floor(Math.random() * 6) + 1;
+//FINALLY: the number 1 on the end gets us to the 6. Without 1, then it would just generate a random number between 1 and 5.
+
+//--------------------------------------------------------------------
+
+//This is important to remember. Recall that you had set up a long if else statement for changing the image of the dice when it was rolled. This was fine, but there is a much more elegant way to do it:
+function rollDice() {
+    var diceImage = document.getElementById("dice-image");
+    document.querySelector(".dice").style.display = "block";
+    dice = Math.floor(Math.random() * 6) + 1;
+    diceImage.src = 'dice-' + dice + '.png';
+    console.log(dice);
+}
+//Note that all you need is DOM manipulation to update the image each time you click roll the dice you big dummy.
+//This is what you had before:
+
+function rollDice() {
+    var diceImage = document.getElementById("dice-image");
+    dice = Math.floor(Math.random() * 6) + 1;
+    if (dice === 1) {
+        diceImage.src = "dice-1.png";
+    } else if (dice === 2) {
+        diceImage.src = "dice-2.png"
+    } else if (dice === 3) {
+        diceImage.src = "dice-3.png"
+    } else if (dice === 4) {
+        diceImage.src = "dice-4.png"
+    } else if (dice === 5) {
+        diceImage.src = "dice-5.png"
+    } else if (dice === 6) {
+        diceImage.src = "dice-6.png"
+    }
+    console.log(dice);
+}
+
+//--------------------------------------------------------------------
+
+//Toggle!!
+
+//So when you have to toggle between showing which player's turn it is, you can do this through using toggle. This goes back to the dice game:
+
+        document.querySelector(".player-0-panel").classList.remove("active");
+        document.querySelector(".player-1-panel").classList.add("active");
+        //The above code would remove the turn class from one player, and add it to the other, but this doesn't help you with reverting back to player one when it is their turn. This is where toggle comes in:
+        document.querySelector(".player-0-panel").classList.toggle("active");
+        document.querySelector(".player-1-panel").classList.toggle("active");
+        //This will switch back and forth between the classes when the conditions for a change are met.
+
+//--------------------------------------------------------------------
+
+//Also, if you want to avoid really any changing of classes or adding onClick in HTML, do the event listener:
+document.querySelector(".class-hold").addEventListener("click", function) {}
+//You would do this rather than adding onClick to the class in teh HTML page.
+
+//--------------------------------------------------------------------
+
+//Random - remember with slice(); that the first number says where you want to start in the string. The second number says where you want to end, and it should always be one number more than what you're thinking.
+
+//--------------------------------------------------------------------
+
+//Destructuring objects and arrays allows you to pull out the preferred or necessary data that you want.
+
+//For example, we could create variables to get the necessary info out like follows:
+
+var object = {
+  first: = 
+}
+
+//--------------------------------------------------------------------
+
+//Remember too that:
+var one += 10; //is simply saying that var one = var one + 10. 
+
+//--------------------------------------------------------------------
+
+//Answer to what the ? is about in JS
+//It is part of a Conditional Operator. It is known as the ternary operator:
+var result = (6 > 5) ? true : false; // think of the ? as the "if" statement, and the : as the if block.
+console.log(result); //This would give you true obviously. So it is another way to do comparisons, and maybe a way to avoid using if statement.
+
+//--------------------------------------------------------------------
+
+//Remember with function scope:
+function test (id) {
+  var car = "blue";
+  var fun = function turn () {
+    var car = "green";
+  };
+  turn();
+  console.log(car); //this would still log out blue, because a function will always go to its parent to find the value of a variable.
+}
+
+//--------------------------------------------------------------------
+
+//function expression vs statement or statement
+
+// Function declaration
+function add(num1, num2) {
+	return num1 + num2;
+}
+
+// Function expression (produce an immediate result)
+var add = function (num1, num2) {
+	return num1 + num2;
+};
+
+//They more-or-less do the same example thing, but there’s one subtle yet important difference between them: HOISTING
+//When a JavaScript file (or HTML document with JavaScript in it) is loaded, function declarations are hoisted to the top of the code by the browser before any code is executed.
+//What does that mean, exactly? Specifically, all of the functions written with function declarations are “known” before any code is run. This allows you to call a function before you declare.
+
+/**
+ * This works!
+ */
+ function add(num1, num2) {
+	return num1 + num2;
+}
+add(3, 3); // returns 6
+
+
+/**
+ * This does, too!
+ */
+substract(7, 4); // returns 3
+function subtract(num1, num2) {
+	return num1 - num2;
+}
+
+//Function expressions, however, do not hoist. If you try to run a function before you’ve expressed it, you’ll get an error.
+
+/**
+ * This works!
+ */
+ var add = function(num1, num2) {
+	return num1 + num2;
+};
+add(3, 3); // returns 6
+
+
+/**
+ * This does not =(
+ */
+substract(7, 4); // returns Uncaught TypeError: subtract is not a function
+var subtract = function (num1, num2) {
+	return num1 - num2;
+};
+
+//Which should you use?
+//It is all a matter of preference really.
+
+//--------------------------------------------------------------------
+
+//Remeber adding onto arrays:
+var array = [3, 4, 2];
+
+array[2] = 5 //This would change the last number to 5.
+array[3] = 6 //This would add 6 onto the end. BUT a better way to do this would be to simply do the following:
+array[array.length] = 6//This would add 6 as a fourth number.
+
+//--------------------------------------------------------------------
+
+//Remember -1 with arrays:
+var array = ["duh", "poo", "gutter", "me"];
+
+console.log(array.indexOf("poo")); //this would return 1 in the console.
+console.log(array.indexOf("my")); //this would return -1, WHICH essentially means undefined or does not exist in the array.
+
+//--------------------------------------------------------------------
+
+//continue for loop is important to know:
+var john = ["Smith", "England", 1652, false, "Pocahontis"];
+for(var i = 0; i < john.length; i++) {
+  if(typeof john[i] === "string") 
+  continue;
+  console.log(john[i]);
+} /*This continue makes it so that if it hits 1652, and false, it steps outside of the loop for those, but continues iterating the others.
+  The list we would get in the console with this would be "Smith", "England", "Pocahontis".*/
+//Break is a little different:
+var john = ["Smith", "England", 1652, false, "Pocahontis"];
+for(var i = 0; i < john.length; i++) {
+  if(typeof john[i] === "string") 
+  break;
+  console.log(john[i]);
+  //This would just console log "Smith", and "England".
+
+  //Then, if you want to loop backwards:
+  var john = ["Smith", "England", 1652, false, "Pocahontis"];
+for(var i = john.length - 1; i >= 0; i--) {
+  console.log(john[i]);
+}
+
+//--------------------------------------------------------------------
+
+/*.val() - method is primarily used to get the values of form elements such as input, select and textarea. When called on an empty collection, it returns undefined.
+See below for an example. The $(this) in this case is referencing the button value that comes from the onclick function in the code. The key though is that the button 
+in HTML has a value assigned to its ID. .val() generates or gets that value because it is attached to this when the button is clicked*/
+
+var yourPick = $(this).val();
+          console.log("Your Pick: " + yourPick);
+
+      //Note that the this keyword is not assigned a value until a function where it is actually defined is called.
+
+/*In a similar example, we see that the youPick var is being compared to the computer pick. I'm still fuzzy on this, but I see that val() returns the value of the button, i.e., the number,
+but it appears that parseInt is still needed for the comparison, which always parses a string and returns the integer.*/
+
+if (parseInt(yourPick) === computerPick) {
+  $("#result").text("Yep! You got it! Refresh the page to play again.");
+  lockGame = true;
+}
+
+//More on this:
+
+function calculateAge(year) {
+  console.log(2016 - year);
+  console.log(this); //this would log the window object, because again, it is not assigned a value until the function where it is defined is actually called. 
+}
+
+var john = {
+  name: john,
+  calcAge = function() {
+    console.log(this);//This would give us the object.
+  }
+}
+john.calAge();
+
+//What about another function inside of this method though?:
+var john = {
+  name: john,
+  calcAge = function() {
+    console.log(this);//This would give us the object.
+    function innerfunction() {
+      console.log(this);
+    }
+    innerfunction();//This would actually log the window object. This means that althought it is written inside of another function, it is still a regular function.
+  }
+}
+john.calAge();
+
+//--------------------------------------------------------------------
+
+//We could also use method borrowing. Lets say you have the following:
+var john = {
+  name: john,
+  yearOfBirth: 1998,
+  calcAge = function() {
+    console.log(this);//This would give us the object.
+    function innerfunction() {
+      console.log(this);
+    }
+    innerfunction();//This would actually log the window object. This means that althought it is written inside of another function, it is still a regular function.
+  }
+};
+john.calAge();
+
+//NOW, we could copy the method from John's stuff, but method borrowing would be smarter coding:
+
+var steve = {
+  name: steve,
+  yearOfBirth: 1987
+};
+steve.calAge = john.calAge; //We do not have the parenthesis because that is for calling a function, but here, we simply treat them as a variable, because wer are assigning a variable. Instead we do this on the next line:
+steve.calAge();
+
+//--------------------------------------------------------------------
+
+
+//Objects: Think of objects as alike arrays that have a key value, or name assigned to each value of that array.
+
+//And this is a object literal:
+var john = {
+  firstName: "john",
+  lastName: "Doe"
+};
+//And again, firstName and lastName or the key value, and they are considered properities of the john object.
+//You can put arrays in an object as well:
+var john = {
+  firstName: "john",
+  lastName: "Doe",
+  family: ["Dad", "Mom", "brother"],
+  isMarried: false
+};
+
+//You can also do little tricks like this for accessing info in the object, outside of dot notation:
+var x = 'lastName';
+console.log(john[x]);
+//Again, you can also update the object:
+isMarried: true;
+
+//Remember too that you could format the object as follows:
+var john = new Object ();
+john.firstName = "john";
+john.lastName = "Doe";
+john.family = ["Dad", "Mom", "brother"],
+john.isMarried = false;
+
+//Going on with this example object with methods, we can also add methods to our object as follows:
+var john = {
+  firstName: "john",
+  lastName: "Doe",
+  family: ["Dad", "Mom", "brother"],
+  birthYear: 1990,
+  isMarried: false,
+  calcAge: function(birthYear) {
+    return 2018 - birthYear;
+  }
+};
+
+//ALSO remember the key word this in this scenario... We could adjust our method above to utilize this and not require a parameter:
+var john = {
+  firstName: "john",
+  lastName: "Doe",
+  family: ["Dad", "Mom", "brother"],
+  birthYear: 1990,
+  isMarried: false,
+  calcAge: function() {
+    return 2018 - this.birthYear;
+  }
+};
+
+//And how might you return the result of the function to the object array?
+john.age = john.calAge();
+//It can get EVEN better though with the following:
+var john = {
+  firstName: "john",
+  lastName: "Doe",
+  family: ["Dad", "Mom", "brother"],
+  birthYear: 1990,
+  isMarried: false,
+  calcAge: function() {
+    this.age = 2018 - this.birthYear;
+  }
+};
+
+//--------------------------------------------------------------------
+
+//So here is your classic object structure:
+var john = {
+    name: 'john',
+    yearOfBirth: 1986,
+    job: 'sucks'
+};
+//Now, taking into account the object you've done above, this is the most popular way to do objects: function constructor
+  var Person = function(name, yearOfBirth, job) {
+    this.name = name;
+    this.yearOfBirth = yearOfBirth;
+    this.job = job;
+  }
+  //NOTES:
+    //This is the FUNCTION CONSTRUCTOR, which allows us to actually create our object below.
+    //See how the letter is capitalized for the function constructor.
+  
+  //Here is our object:
+  var john = new Person('john', 1986, 'sucks');
+  //This is called instantiation.
+  //When we use the word 'new' what this does is create a brand new empty object. Then the constructor function calls the arguments.
+
+  //Now we can add inheritance to this.
+  var Person = function(name, yearOfBirth, job) {
+    this.name = name;
+    this.yearOfBirth = yearOfBirth;
+    this.job = job;
+
+  }
+  //We have our function constructor again, but now we are adding the method to it.
+  var john = new Person('john', 1986, 'sucks');
+
+  john.calculateAge();//This is inheritance, because john is able to inherit this method and use it, because of the new Person, or function constructor.
+  //But, let's say you add other people:
+  var steve = new Person('steve', 1985, 'plumber');
+  //This would be a pain to add all of these people, and is not sustainable because that would require a lot of code. This is where the prototype comes back into play:
+  var Person = function(name, yearOfBirth, job) {
+    this.name = name;
+    this.yearOfBirth = yearOfBirth;
+    this.job = job;
+    this.calculateAge = function() {
+      console.log(2016 - this.yearOfBirth);
+    }
+  };
+  Person.prototype.calculateAge = function() {
+      console.log(2016 - this.yearOfBirth);
+    }
+
+    //This makes it so that if you have complex code, you can isolate the function of the constructor function, and have the information run separately. This is especially useful if you have a constructor function that might have multiple functions to be run at different times.
+
+//--------------------------------------------------------------------
+
+//Take note of this simple tip calculator method inside of the object. Note how simple it is for calculating the tip amount at the end:
+var marcosObj = {
+    bills: [124, 48, 268, 180, 42],
+    totalAmount: [],
+    tipCalc: function() {
+        this.tipAmount = [];
+        this.finalAmount = [];
+        for (var i = 0; i < this.bills.length; i++) {
+            var percentage;
+            var bills = this.bills[i];
+
+            if (bills < 50) {
+                percentage = .2;
+
+            } else if (bills >= 50 && bills < 200) {
+                percentage = .15;
+               
+            } else if (bills > 200) {
+                percentage = .2;
+                
+            }
+        this.tipAmount[i] = bills * percentage; //REMEMBER THIS PART DUDE!!! Simple bloody bracket notation. Since these are still a part of the loop, that is why the [i] can go on the other side. Its so easy!!!
+        this.finalAmount[i] = bills + bills * percentage;
+
+        }
+        console.log(this.finalAmount);
+    }
+};
+
+marcosObj.tipCal();
+
+//--------------------------------------------------------------------
+
+//DUH STUPID!!
+function average(test) {
+    var sum = 0;
+    for (var y = 0; y < test.length; y++) {
+        sum = sum + test[y];
+    }
+    return sum / test.length;
+}
+//Now that you've cooled down a little, this is how you can get the average out of any array of numbers. Just cool down and remember this for later.
+
+//--------------------------------------------------------------------
+
+//In response to parseInt working with val(), I found the following on stackoverflow:
+
+//Can someone help me figuring out why the following jQuery code doesn't work? I want to return a integer from an user input.
+
+var test = parseInt($("#testid"));
+
+//Response: 
+var test = parseInt($("#testid").val(), 10);
+
+//Just remember that parseInt() will convert a string into an integer:
+
+var you = prompt("What is your age?")
+
+var result = parseInt(you) + 2
+
+//Also, if you want to hold onto a decimal like 1.9999. Use parseFloat:
+
+var num = parseFloat("1.9999") //will remain as 1.9999
+
+  /*You have to tell it you want the value of the input you are targeting. And also, always provide the second argument (radix) to parseInt. 
+  It tries to be too clever and autodetect it if not provided and can lead to unexpected results. Providing 10 assumes you are wanting a base 10 number.*/
+
+/*You can finesse the distinction between integers and floating-point
+numbers by using Number. This handy conversion tool converts a string representing
+either an integer or a floating-point number to a number that's identical to the one inside the
+parentheses.*/
+
+//--------------------------------------------------------------------
+
+//The following code converts the string "24" to the number 24.
+var integerString = "24"
+var num = Number(integerString);
+
+/*Suppose your code has done an arithmetic calculation that yielded a big number. Now you
+want to present the result of the calculation to your user. But before you display the number,
+you want to format it with commas so it's readable. In order to do that, you'll have to convert
+the number to a string. This is how you do it.*/
+
+//Converting a number to a string, perhaps so you can format it, is straightforward.
+
+var numberAsNumber = 1234;
+var numberAsString = numberAsNumber.toString();
+
+/*The code above converts the number 1234 to the string "1234" and assigns it to the
+variable numberAsString.*/
+
+//--------------------------------------------------------------------
+
+//Just note the href thing... This makes it so that when the person clicks on the button, it reloads the same page, but keeps you in the same spot, i.e., doesn't return to the top or anything like that.
+
+<a href="JavaScript:void(0)" onClick="alert('Hi');">Click</a>
+
+//--------------------------------------------------------------------
+
+//Look at the example below:
+
+var total = price + (price * taxRate);
+
+//This gives you the tax rate, but the number it would give on something like $9.95 is 10.59675, which isn't want you'd really charge the customer.
+
+//Here's how to do it.
+var prettyTotal = total.toFixed(2);
+
+/*The statement above rounds the number represented by total to 2 places and assigns the
+result to the variable prettyTotal. The number inside the parentheses tells JavaScript how
+many places to round the decimal to.*/
+
+/*Unfortunately, the toFixed method comes with a surprise inside. If a decimal ends in 5, it
+usually rounds up, as you would expect. But, depending on the browser, sometimes it rounds
+down! If, for example, you apply the method to 1.555, specifying 2 decimal places, it may give
+you "1.56". Or it may produce "1.55".*/
+
+/*There are sophisticated ways to address the problem. Here's an inelegant fix that uses
+methods you already know and understand.*/
+var str = num.toString();
+if (str.charAt(str.length - 1) === "5") {
+str = str.slice(0, str.length - 1) + "6";
+}
+num = Number(str);
+prettyNum = num.toFixed(2);
+
+//--------------------------------------------------------------------
+
+//append vs html:
+
+/*.append() will tack on the given HTML to the end of the already present HTML in the element that you're calling .append() on, whereas .html() will overwrite 
+the inner HTML that is currently present in the element with the new HTML that you've passed in. If the element is empty, or if you want to replace the inner 
+HTML of an element, then .html() is very handy. If you want to add a new string of html to an element (say, for example, you want to dynamically add a new list 
+item), then .append() is great.*/
+
+//--------------------------------------------------------------------
+
+//JQUERY. Dude, remember that you can dynamically an element, at the same time that you can assign properties to it:
+var rating = response.Rated;
+          // Creates an element to have the rating displayed
+          var divv = $("<p>").text(rating);
+
+//--------------------------------------------------------------------
+
+//SessionStorage vs localStorage:
+
+/*localStorage and sessionStorage both extend Storage. There is no difference between them except for the intended "non-persistence" of sessionStorage. That is, the data 
+stored in localStorage persists until explicitly deleted. Changes made are saved and available for all current and future visits to the site. For sessionStorage, changes 
+are only available per window (or tab in browsers like Chrome and Firefox). Changes made are saved and available for the current page, as well as future visits to the site 
+on the same window. Once the window is closed, the storage is deleted.*/
+
+//--------------------------------------------------------------------
+
+//On Functions
+
+//Parameters and Arguments
+    //More to add here, but here is a simple example of how they should work:
+  var zooAnimals = ["Zebra", "Rhino", "Giraffe", "Owl"];
+    function logArray(list) {
+    for (var j = 0; j < list.length; j++) {
+      console.log(list[j]);
+    }
+  
+  // Produces the same result as the raw loop above.
+  logArray(zooAnimals);
+
+/*Important point here, where you've been a little confused. But, you don't have to declare a variable when its used as a parameter in a function. This makes its 
+declaration implicit. A good way to think of it is with the argument. That is what gets passed to the parameter, thus make the argument the definition of the parameter*/
+
+//--------------------------------------------------------------------
+
+//Any number of arguments, separated by commas, can be passed to parameters that match their number.
+
+//--------------------------------------------------------------------
+
+//Easy way to remember how to get your info in JS from the DOM, and then push the text into it:
+    // Create variables that hold references to the places in the HTML where we want to display things.
+    var userChoiceText = document.getElementById("userchoice-text");
+    // Display the user and computer guesses, and wins/losses/ties.
+    userChoiceText.textContent = "You chose: " + userGuess;
+
+//--------------------------------------------------------------------
+
+//Callback function:
+
+??????
+
+//Look at this:
+$("#color-picker").click(function(event) {
+  userAnswer = event.target.id
+//This is how you get the ID of an element that fires an event, or refers to the element that triggered the event, where 'event' was the parameter passed to the function.
+
+//--------------------------------------------------------------------
+
+//This comes from the file extension example. Remember this for when you have an array of things like where you want to check which file is a video or image.
+var fileX = fileArray[i].split(".").pop();
+//As you can see, you split it at the ., then you "pop" it off, to get the isolated "jpg", "png", etc.
+
+//Then, you use indexOf to see if the index portion after the period is found in the array of either video or image extensions
+if (imageExtensions.indexOf(fileX) !== -1)
+//Essentially, the indexOf is an elemnt to locate in the array.
+
+//--------------------------------------------------------------------
+
+//We need to break this down from the hangman game:
+String.fromCharCode(event.which).toLowerCase();
+//String.fromCharCode() according to documentation is a method that returns a string created from the specified sequence. This goes back to how each key on your keyboard has a number associated to it.
+//example:
+String.fromCharCode(65, 66, 67) //when logged out would return "ABC"
+//(event.which) e.which is not an event, which is a property of the event object, which most people label as e in their event handlers. It contains the key code of the key which was pressed to trigger the event (eg: keydown, keyup).
+
+//--------------------------------------------------------------------
+
+//Remember this exact format for an AJAX call:
+
+    var title = "space+jam";
+    var queryURL = "https://www.omdbapi.com/?t=" + title + "&y=&plot=short&apikey=trilogy";
+
+    $.ajax({
+      url: queryURL,
+      method: "GET"
+    }).then(function(response) {
+      console.log(response);
+      console.log(response.Runtime);
+    });
+
+//On stringify(). A common use of JSON is to exchange data to/from a webserver. When sending data to a web server, the data HAS TO BE A STRING. Thus, you need to convert it into a string with JSON stringify().
+$.ajax({
+          url: queryURL,
+          method: "GET"
+        }).then(function(response) {
+          $("#movie-view").text(JSON.stringify(response));
+
+//--------------------------------------------------------------------
+
+//Remember how to check the type of something:
+  // If each argument is a string it will note that.
+  if (typeof x === "string" && typeof y === "string" && typeof z === "string") {
+          console.log("Yep. They are all strings");
+        }
+
+//--------------------------------------------------------------------
+
+//GENERAL LOOPS
+
+//There is a difference between for/in, for/of, and for/each:
+
+//for in:
+//The for...in statement iterates a specified variable over all the enumerable properties of an object. For each distinct property, JavaScript executes the specified statements. A for...in statement looks as follows:
+
+for (variable in object) {
+  statements
+}
+
+//The following function takes as its argument an object and the object's name. It then iterates over all the object's properties and returns a string that lists the property names and their values.
+
+function dump_props(obj, obj_name) {
+  var result = '';
+  for (var i in obj) {
+    result += obj_name + '.' + i + ' = ' + obj[i] + '<br>';
+  }
+  result += '<hr>';
+  return result;
+}
+
+//--------------------------------------------------------------------
+
+
+//for of:
+//The for...of statement creates a loop Iterating over iterable objects (including Array, Map, Set, arguments object and so on), invoking a custom iteration hook with statements to be executed for the value of each distinct property.
+
+for (variable of object) {
+  statement
+}
+
+//Difference between for in and for of:
+//The following example shows the difference between a for...of loop and a for...in loop. While for...in iterates over property names, for...of iterates over property values:
+
+var arr = [3, 5, 7];
+arr.foo = 'hello';
+
+for (var i in arr) {
+  console.log(i); // logs "0", "1", "2", "foo"
+}
+
+for (var i of arr) {
+  console.log(i); // logs 3, 5, 7
+}
+
+//Look at this:
+
+$("#operator").text($(this).text());
+
+//This is from the calculator. You recall that you had to register the operator click, which you did, but it would output the string "plus", or "minus" rather than an actual symbol. Apparently doing the text twice gives you the symbol... IDK.
+
+//GENERAL METHODS
+
+//hasOwnProperty() has come up a bit for you. What you are stuck trying to figure out is what this does. Look at the following example:
+If( somevar.hasOwnProperty('someProperty') ) {
+  // do something();
+} else {
+ // do sometingelse();
+}
+//Now, the question is what is it doing here... 
+//The answer: hasOwnProperty returns a boolean value indicating whether the object on which you are calling it has a property with the name of the argument. For example:
+
+var x = {
+    y: 10
+};
+console.log(x.hasOwnProperty("y")); //true
+console.log(x.hasOwnProperty("z")); //false
+/*However, it does not look at the prototype chain of the object. It's useful to use it when you enumerate the properties of an object with the for...in construct. If you 
+want to see the full details, the ES5 specification is, as always, a good place to look.*/
+
+
+
+//Pop() takes it off the end. Shift() will take it off the front.
+
+//The bind() method creates a new function that, when called, has its this keyword set to the provided value, with a given sequence of arguments preceding any provided when the new function is called.
+
+var module = {
+  x: 42,
+  getX: function() {
+    return this.x;
+  }
+}
+
+var unboundGetX = module.getX;
+console.log(unboundGetX()); // The function gets invoked at the global scope
+// expected output: undefined
+
+var boundGetX = unboundGetX.bind(module);
+console.log(boundGetX());
+// expected output: 42
+
+
+//Apply () does something somewhat similar:
+
+var numbers = [5, 6, 2, 3, 7];
+
+var max = Math.max.apply(null, numbers);
+
+console.log(max);
+// expected output: 7
+
+var min = Math.min.apply(null, numbers);
+
+console.log(min);
+// expected output: 2
+
+//The apply() method calls a function with a given this value, and arguments provided as an array (or an array-like object).
+
+//--------------------------------------------------------------------
+
+//Prepend vs append
+
+//Very simple: 
+.append() //puts data inside an element at last index and
+.prepend() //puts the prepending elem at first index
+
+//--------------------------------------------------------------------
+
+//html vs text
+
+//Very simple: If you have html content like tags or something like that, use .html(). If you have just plain text or content, use .text().
+
+//--------------------------------------------------------------------
+
+//Crash course on Callbacks, Promises, Async Await YOUTUBE VID TO GO BACK TO
+
+//--------------------------------------------------------------------
+//HOISTING
+
+calculateYear(1998);
+
+function calculateYear(year) {
+    console.log(2018 - year);
+}
+
+//This would work. This has to do with hoisting. This will still run just fine because in JavaScript, a variable can be declared after it has been used. In other words; a variable can be used before it has been declared.
+
+//The above only works for function declarations. It would be different for a function expression:
+  retirment(1990)
+
+var retirement = function(year) {
+  console.log(65 - (2016 - year));
+}
+
+//This would not work as a function expression. Hoisting only works for function declarations.
+
+console.log(age);
+var age = 23;
+//This won't work either. This is because hoisting in the creation phase, the code is scanned for variable declarations and then they are set to undefined. Only once the code runs are they defined.
+var age = 23;
+
+function foo() {
+  var age = 65;
+  console.log(age);
+}
+foo();
+console.log(age);
+
+//This would give you 65 and 23, because one is part of the global execution object, and the other is part of the function object.
+//--------------------------------------------------------------------
+
+//Lexical scoping is a function inside of another and therefore has access to the data in both the function its in and the window://#endregion
+var a = "Hello";
+first()
+
+function first() {
+  var b = "hi";
+  second();
+
+  function second() {
+    var c = "hey";
+    console.log(a + b + c); //This would console "hello", "hi", and "hey"
+  }
+}
+
+//So then obviously with this example:
+var a = 'Hello!';
+first();
+
+function first() {
+    var b = 'Hi!';
+    second();
+
+    function second() {
+        var c = 'Hey!';
+        third()
+    }
+}
+
+function third() {
+    var d = 'John';
+    console.log(a + b + c + d);
+}
+
+//We would not be able to access b and c for the third function.
+
+//--------------------------------------------------------------------
+
+    //Example of a constructor function:
+
+
+//--------------------------------------------------------------------
+
+//PROTOTYPE SUMMARY
+//Heavy stuff, but try and remember this:
+  //Every Javascript object has a prototype property, which makes inheritance possible in Javascript.
+  //The prototype property of an object is where we put methods and properties thta we want other objects to inherit.
+  //The Constructor's prototype property is NOT the prototype of the Constructor itself, its the prototype of ALL instances that are created through it.
+  //When a certain method (or property) is called, the search starts in the object itself, and if it cannot be found, the search moves on to the object's prototype.
+    //This continues until the method is found: prototype chain.
+
+</script>
